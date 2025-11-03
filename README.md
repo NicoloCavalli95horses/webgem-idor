@@ -18,3 +18,4 @@ This project is part of the paper "Web GEM: Broken Access Control (BAC) Vulnerab
 - `npm install` (both in the root folder and within `client/` folder).
 - build from the client `npm run build` (static content will be served by nest.js).
 - test `http://localhost:3000/` with web scanners of your choice (OWASP ZAP, libraries, etc).
+- this type of IDOR can only be found by extracting relevant information (e.g., IDs) from previous HTTP messages or by tampering with the GUI (which stores the ID)
