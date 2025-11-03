@@ -17,10 +17,12 @@ export class ImagesService {
   }
 
   getImagesByID(id: string) {
-    const img = this.images.find(i => i.id === id);
+    const img = {...this.images.find(i => i.id === id)};
     if (img) {
-      (img as any).content = (img.is_premium) ? 'secret content' : 'free content';
-      return img;
+      return {
+        ...img,
+        content: (img.is_premium) ? 'secret content' : 'free content'
+      }
     }
     throw new NotFoundException(`Image with id ${id} not found`);
   }
