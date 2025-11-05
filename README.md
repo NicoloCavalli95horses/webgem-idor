@@ -17,5 +17,6 @@ This project supports the paper "Web GEMs: Revealing Broken Access Control (BAC)
 - `git clone`.
 - `npm install` (both in the root folder and within `client/` folder).
 - build from the client `npm run build` (static content will be served by nest.js).
+- run with `npm run start`
 - test `http://localhost:3000/` with web scanners of your choice (OWASP ZAP, libraries, etc).
 - this type of IDOR can only be found by extracting relevant information (i.e., IDs) from previous HTTP messages or by inspecting the component tree with Vue Dev Tool

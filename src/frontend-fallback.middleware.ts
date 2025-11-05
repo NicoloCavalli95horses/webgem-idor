@@ -1,7 +1,14 @@
+//================
+// Import
+//================
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { join } from 'path';
 import { createReadStream } from 'fs';
 
+
+//================
+// Middleware class
+//================
 @Injectable()
 export class FrontendFallbackMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {

@@ -1,9 +1,16 @@
+//================
+// Import
+//================
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Image } from './images.interface';
 
 
+//================
+// Service class
+//================
 @Injectable()
 export class ImagesService {
-  private images = [
+  private images: Image[] = [
     { id: "26ecef7e-4e27-426f-81c4-51a9cd41871f", is_premium: false },
     { id: "487b7235-204c-42eb-8535-42dd06999e75", is_premium: true },
     { id: "c7f4134d-b747-487f-872b-e0d20abac35c", is_premium: true },
@@ -17,8 +24,8 @@ export class ImagesService {
   }
 
   getImagesByID(id: string) {
-    const img = {...this.images.find(i => i.id === id)};
-    if (img) {
+    const img = this.images.find(i => i.id === id);
+    if (img?.id) {
       return {
         ...img,
         content: (img.is_premium) ? 'secret content' : 'free content'

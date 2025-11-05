@@ -1,9 +1,16 @@
+//================
+// Import
+//================
 import { Module, MiddlewareConsumer, NestModule, RequestMethod } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ImagesModule } from './images/images.module';
 import { FrontendFallbackMiddleware } from './frontend-fallback.middleware';
 
+
+//================
+// Class
+//================
 @Module({
   imports: [
     ServeStaticModule.forRoot({
