@@ -1,5 +1,5 @@
 <template>
-  <div class="box" :class="{'premium': item.is_premium}">
+  <div class="box" :class="{'premium': item.is_premium}" :style="{'background-color': item.label}">
     {{ item.is_premium ? "premium 🔒" : "free" }}
   </div>
 </template>

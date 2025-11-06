@@ -2,6 +2,7 @@
   <div>
     <h1>Content details</h1>
     <h2>ID: {{ id }}</h2>
+    <h2>Label: {{ label }}</h2>
     <h2>Content: {{ content }}</h2>
   </div>
 </template>
@@ -19,13 +20,15 @@ import { useRoute } from 'vue-router';
 // ====================
 const route = useRoute();
 const id = ref();
+const label = ref();
 const content = ref();
 
 // ====================
 // Functions
 // ====================
-async function getItemDetail(id) {
-  const url = `http://localhost:3000/api/images/${id}`;
+async function getItemDetail(label, id) {
+  const url = `http://localhost:3000/api/images/${label}/${id}`;
+
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -44,7 +47,8 @@ async function getItemDetail(id) {
 // ====================
 onMounted( async () => {
   id.value = route.params.id;
-  const item = await getItemDetail(id.value);
+  label.value = route.params.label;
+  const item = await getItemDetail(label.value, id.value);
   content.value = item.content;
 });
 

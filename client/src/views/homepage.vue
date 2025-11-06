@@ -24,7 +24,7 @@ import Banner from '../components/banner.vue';
 const items = ref();
 const route = useRouter();
 const show_banner = ref(false);
-
+const labels = ["red", "blue", "green", "yellow", "pink", "orange"];
 
 // ====================
 // Functions
@@ -37,18 +37,23 @@ async function getData() {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    return await response.json();
+    const json = await response.json();
+    return json.map((i,idx) => {
+      i.label = labels[idx];
+      return i;
+    });
+
   } catch (error) {
     console.error(error.message);
   }
 }
 
 function onClick(i) {
-  // Critical access-control logic (!)
+  // Critical access-control logic (divergence point as defined by Kim et al. 2023)
   if (i.is_premium) {
     show_banner.value = true;
   } else {
-    route.push( {name: 'detail', params: {id: i.id}} );
+    route.push( {name: 'detail', params: {id: i.id, label: i.label}} );
   }
 }
 
