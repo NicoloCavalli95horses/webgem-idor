@@ -1,14 +1,14 @@
-# Web GEM-Based Broken Access Control (BAC) Vulnerability (Test Application)
+# High-entropy UUIDs in exposed objects in SPAs (Single-Page Application)
 
-This project supports the paper "Web GEMs: Revealing Broken Access Control (BAC) Vulnerabilities in Web Applications Through Front-End Tampering". The goal of this project is to test the ability of web vulnerability scanners to detect Insecure Direct Object Reference (IDOR) vulnerabilities in SPA applications built with JS frameworks (eg., Vue, React, Angular, etc). In these applications, routing is handled by the front-end and the web server usually responds to HTTP requests to deliver content.
+The goal of this project is to test the ability of web vulnerability scanners to detect Insecure Direct Object Reference (IDOR) vulnerabilities in SPA applications built with JS frameworks (eg., Vue, React, Angular, etc). In these applications, routing is handled by the front-end and the web server usually responds to HTTP requests to deliver content.
 
 ## Why this test?
 
 - Classic IDOR vulnerabilities occur when a web server mistakenly provides resources to unauthorized users who discover simple patterns in the URLs (for example, from `/user/123` the adversary tries `/user/124`),
-- In real web applications, these patterns are often not so simple. Pseudo-random IDs may be used, and the final endpoint may present a complicated structure,
-- Web back-end developers may neglect to protect these resources (perhaps believing the final endpoint is impossible to guess),
-- In SPA applications, critical information may be stored within the component tree, as a component's state
-- Through JavaScript Component Hijacking (JCH) an adversary can access this information and craft URLs to protected resources,
+- In real web applications, these patterns are often not so simple. High-entropy UUIDs may be used, and the final endpoint may present a complicated structure,
+- Web back-end developers may neglect to test the access to these resources,
+- In SPA applications, these UUIDs may be stored within the component tree, as a component's state
+- By tampering with a front-end an adversary can access this information and craft URLs to protected resources,
 - We have empirically found that this phenomenon is not uncommon. Hence the need to develop a benchmark application to improve IDOR detection techniques.
 
 ## Setup
