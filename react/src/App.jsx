@@ -44,8 +44,12 @@ function App() {
     if (i.is_premium) {
       setShowBanner(true);
     } else {
-      navigate(`/detail/${i.label}/${i.id}`);
+      navigate(`/${i.id}`);
     }
+  }
+
+  function togglePopup() {
+    setShowBanner(false);
   }
 
   return (
@@ -53,9 +57,7 @@ function App() {
       <Routes>
         <Route path="/" element={
           <div className="main">
-            {showBanner && (
-              <Banner onClick={() => setShowBanner(false)} />
-            )}
+            {showBanner && <Banner onClick={togglePopup}/>}
 
             {items.map((i) => (
               <Preview
@@ -67,7 +69,7 @@ function App() {
           </div>
         } />
 
-        <Route path="/detail/:label/:id" element={<Detail />} />
+        <Route path="/:id" element={<Detail />} />
       </Routes>
     </>
   );

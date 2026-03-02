@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 function Detail() {
-  const { id, label } = useParams();
+  const { id } = useParams();
   const [content, setContent] = useState(null);
 
   useEffect(() => {
     async function fetchDetail() {
-      const url = `http://localhost:3456/api/images/${label}/${id}`;
+      const url = `http://localhost:3456/api/images/${id}`;
 
       try {
         const response = await fetch(url);
@@ -23,16 +23,16 @@ function Detail() {
       }
     }
 
-    if (id && label) {
+    if (id) {
       fetchDetail();
     }
-  }, [id, label]);
+  }, [id]);
 
   return (
     <div>
       <h1>Content details</h1>
       <h2>ID: {id}</h2>
-      <h2>Label: {label}</h2>
+      {/* <h2>Label: {label}</h2> */}
       <h2>Content: {content}</h2>
     </div>
   );

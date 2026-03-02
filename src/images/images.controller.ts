@@ -19,8 +19,8 @@ export class ImagesController {
   }
 
   // Get image
-  @Get(':label/:id')
-  findOne(@Param('label') path: string, @Param('id') id: string) {
-    return this.imagesService.getImage(path, id);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.imagesService.getImage(id);
   }
 }
