@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import './detail.css';
 
 function Detail() {
   const { id } = useParams();
@@ -29,10 +30,8 @@ function Detail() {
   }, [id]);
 
   return (
-    <div>
+    <div className="detail-main">
       <h1>Content details</h1>
-      <h2>ID: {id}</h2>
-      {/* <h2>Label: {label}</h2> */}
       <h2>Content: {content}</h2>
     </div>
   );
