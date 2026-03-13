@@ -6,7 +6,7 @@ function Preview({ item, onClick }) {
       className={`box ${item.is_premium ? "premium" : ""}`}
       onClick={onClick}
     >
-      <div className="label" style={{ backgroundColor: item.label }} />
+      <div className={`label ${item.is_premium ? "label-premium" : ""}`} style={{ backgroundColor: item.label }} />
       {item.is_premium ? "premium 🔒" : "free"}
     </div>
   );
