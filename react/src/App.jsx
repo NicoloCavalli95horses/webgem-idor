@@ -14,30 +14,24 @@ import Detail from "./components/Detail";
 function App() {
   const [items, setItems] = useState([]);
   const [showBanner, setShowBanner] = useState(false);
-  const labels = ["red", "blue", "green", "yellow", "pink", "orange"];
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const freeItems = items.filter(i => !i.is_premium);
+  const onePremium = items.find(i => i.is_premium);
+  const allFreeExceptOne = onePremium ? [...freeItems, onePremium] : freeItems;
+  useEffect(() =>{ getData();}, []);
 
   async function getData() {
     const url = "http://localhost:3456/api/images";
 
     try {
       const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-
+      if (!response.ok) { throw new Error(`Response status: ${response.status}`); }
       const json = await response.json();
-
-      const enriched = json.map((i, idx) => ({ ...i, label: labels[idx] }));
-      setItems(enriched);
+      setItems(json);
     } catch (error) {
       console.error(error.message);
     }
+
   }
 
   function handleClick(i) {
@@ -56,16 +50,32 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={
-          <div className="main">
-            {showBanner && <Banner onClick={togglePopup}/>}
+          <div>
+            <h2>Level 1</h2>
+            <div className="main">
+              {showBanner && <Banner onClick={togglePopup} />}
 
-            {items.map((i) => (
-              <Preview
-                key={i.id}
-                item={i}
-                onClick={() => handleClick(i)}
-              />
-            ))}
+
+              {allFreeExceptOne.map((i) => (
+                <Preview
+                  key={i.id}
+                  item={i}
+                  onClick={() => handleClick(i)}
+                />
+              ))}
+            </div>
+            <h2>Level 2</h2>
+
+            <div className="main">
+
+              {items.filter(i => i.is_premium && i.id != onePremium.id).map((i) => (
+                <Preview
+                  key={i.id}
+                  item={i}
+                  onClick={() => handleClick(i)}
+                />
+              ))}
+            </div>
           </div>
         } />
 

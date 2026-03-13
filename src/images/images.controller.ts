@@ -12,10 +12,20 @@ import { ImagesService } from './images.service';
 export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
-  // Get all images
   @Get()
   findAll() {
     return this.imagesService.getAllImages();
+  }
+
+  @Get('free')
+  findAllFree() {
+    return this.imagesService.getAllFreeImages();
+  }
+
+
+  @Get('premium')
+  findAllPremium() {
+    return this.imagesService.getAllPremiumImages();
   }
 
   // Get image

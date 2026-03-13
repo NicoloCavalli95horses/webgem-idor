@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 function Detail() {
   const { id } = useParams();
-  const [content, setContent] = useState(null);
+  const [item, setItem] = useState(null);
 
   useEffect(() => {
     async function fetchDetail() {
@@ -18,7 +18,7 @@ function Detail() {
         }
 
         const item = await response.json();
-        setContent(item.content);
+        setItem(item);
       } catch (error) {
         console.error(error.message);
       }
@@ -32,7 +32,8 @@ function Detail() {
   return (
     <div className="detail-main">
       <h1>Content details</h1>
-      <h2>Content: {content}</h2>
+      <h2>Content: {item?.content}</h2>
+      <h2>Label: {item?.label}</h2>
     </div>
   );
 }
