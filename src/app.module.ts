@@ -6,6 +6,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ImagesModule } from './images/images.module';
 import { FrontendFallbackMiddleware } from './frontend-fallback.middleware';
+import { UserModule } from './user/user.module';
 
 
 //================
@@ -18,6 +19,7 @@ import { FrontendFallbackMiddleware } from './frontend-fallback.middleware';
       exclude: ['/api/*path'],
     }),
     ImagesModule,
+    UserModule,
   ],
 })
 

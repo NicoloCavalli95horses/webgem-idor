@@ -41,3 +41,9 @@ body {
   height: 100%;
 }
 
+button {
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}

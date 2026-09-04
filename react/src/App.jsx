@@ -1,12 +1,14 @@
 // ====================
 // Import
 // ====================
+import "./App.css";
 import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import "./App.css";
 import Banner from "./components/Banner";
 import Preview from "./components/Preview";
 import Detail from "./components/Detail";
+import SecretPage from "./components/SecretPage";
+import { executeReq } from "./utils/api";
 
 // ====================
 // Functions
@@ -15,23 +17,11 @@ function App() {
   const [items, setItems] = useState([]);
   const [showBanner, setShowBanner] = useState(false);
   const navigate = useNavigate();
-  const freeItems = items.filter(i => !i.is_premium);
-  const onePremium = items.find(i => i.is_premium);
-  const allFreeExceptOne = onePremium ? [...freeItems, onePremium] : freeItems;
-  useEffect(() =>{ getData();}, []);
+  useEffect(() => { getData(); }, []);
 
   async function getData() {
-    const url = "http://localhost:3456/api/images";
-
-    try {
-      const response = await fetch(url);
-      if (!response.ok) { throw new Error(`Response status: ${response.status}`); }
-      const json = await response.json();
-      setItems(json);
-    } catch (error) {
-      console.error(error.message);
-    }
-
+    const data = await executeReq("http://localhost:3456/api/images");
+    setItems(data);
   }
 
   function handleClick(i) {
@@ -46,17 +36,24 @@ function App() {
     setShowBanner(false);
   }
 
+  async function onSecretPageLoad() {
+    const user = await executeReq("http://localhost:3456/api/user");
+    if (user?.isAuth) {
+      navigate("secret-page");
+    } else {
+      setShowBanner(true);
+    }
+  }
+
   return (
     <>
       <Routes>
         <Route path="/" element={
           <div>
-            <h2>Level 1</h2>
+            <h2>External resources (IDOR)</h2>
             <div className="main">
               {showBanner && <Banner onClick={togglePopup} />}
-
-
-              {allFreeExceptOne.map((i) => (
+              {items.map((i) => (
                 <Preview
                   key={i.id}
                   item={i}
@@ -64,21 +61,14 @@ function App() {
                 />
               ))}
             </div>
-            <h2>Level 2</h2>
-
+            <h2>Client-side access control</h2>
             <div className="main">
-
-              {items.filter(i => i.is_premium && i.id != onePremium.id).map((i) => (
-                <Preview
-                  key={i.id}
-                  item={i}
-                  onClick={() => handleClick(i)}
-                />
-              ))}
+              <button onClick={onSecretPageLoad}>Go to secret page</button>
             </div>
           </div>
         } />
 
+        <Route path="/secret-page" element={<SecretPage />} />
         <Route path="/:id" element={<Detail />} />
       </Routes>
     </>

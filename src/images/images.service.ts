@@ -12,16 +12,10 @@ import { Image } from './images.interface';
 export class ImagesService {
 
   private images: Image[] = [
-    { id: crypto.randomUUID(), label: "coral", is_premium: true },
     { id: crypto.randomUUID(), label: "blue", is_premium: false },
-    { id: crypto.randomUUID(), label: "green", is_premium: false },
-    { id: crypto.randomUUID(), label: "yellow", is_premium: true },
-    { id: crypto.randomUUID(), label: "pink", is_premium: false },
-    { id: crypto.randomUUID(), label: "orange", is_premium: true },
+    { id: crypto.randomUUID(), label: "red", is_premium: true },
+    { id: crypto.randomUUID(), label: "yellow", is_premium: false },
     { id: crypto.randomUUID(), label: "purple", is_premium: true },
-    { id: crypto.randomUUID(), label: "brown", is_premium: false },
-    { id: crypto.randomUUID(), label: "lime", is_premium: false },
-    { id: crypto.randomUUID(), label: "aqua", is_premium: true },
   ];
 
 

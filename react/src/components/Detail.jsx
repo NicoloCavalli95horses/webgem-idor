@@ -32,8 +32,10 @@ function Detail() {
   return (
     <div className="detail-main">
       <h1>Content details</h1>
-      <h2>Content: {item?.content}</h2>
-      <h2>Label: {item?.label}</h2>
+      <h2>Content</h2>
+      <p>{item?.content}</p>
+      <h2>Label</h2>
+      <p>{item?.label}</p>
     </div>
   );
 }
